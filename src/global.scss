@@ -1,43 +1,36 @@
+/** Importar aquí las tipografias necesarias de theme.css */
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap");
+
 @import "variables.scss";
 
-.App {
-  background-color: $primary-background-color;
-  text-align: center;
-  min-height: 100%;
-  min-width: 100%;
+/** PrimeFlex Library */
+@import "/node_modules/primeflex/primeflex.css";
+
+/** Themes Prearmados de PrimeReact */
+// @import "primereact/resources/themes/lara-dark-blue/theme.css";
+// @import "primereact/resources/themes/md-dark-indigo/theme.css";
+// @import "primereact/resources/themes/soho-dark/theme.css";
+// @import "primereact/resources/themes/viva-dark/theme.css";
+// @import "primereact/resources/themes/vela-blue/theme.css";
+// @import "primereact/resources/themes/arya-blue/theme.css";
+
+body {
+  font-family: var(--font-family);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.cris-height-08 {
+  height: 60vh;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+.cris-title {
+  font-size: x-large;
+  font-weight: bold;
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+  justify-content: center; 
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  height: 60px;
+  color: var(--primary-color-text);
+  background-color: var(--primary-color);
 }

@@ -1,33 +1,26 @@
-import React from 'react';
+import React from "react";
+import { PrimeReactProvider } from "primereact/api";
 // import logo from './logo.svg';
-import './global.scss';
+import "./global.scss";
+import "./theme.css";
 
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
-import { Container } from '@mui/material';
-import { Login } from './screens/non-authenticated/Login';
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+
+import Router from "screens/routes/Router";
+import ErrorBoundary from "screens/common/ErrorBoundary";
 
 function App() {
   return (
-    <Container className="App">
-      {/*<header className="App-header">
-         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a> 
-      </header>*/}
-      <Login />
-    </Container>
+    <PrimeReactProvider>
+      <ErrorBoundary>
+        <div className="h-full">
+          <Router />
+        </div>
+      </ErrorBoundary>
+    </PrimeReactProvider>
   );
 }
 

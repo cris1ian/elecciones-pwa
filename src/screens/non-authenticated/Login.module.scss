@@ -1,23 +1,11 @@
 @import "variables.scss";
 
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-.phoneInput {
-    color: white;
-    margin-bottom: 50px;
+.mainInput {
+    width: 100%;
+    text-align: center;
     font-size: large;
 }
 
-.buttonContainer {
-    margin-bottom: 20px;
-    button {
-    }
+.button {
+    width: 60%;
 }
