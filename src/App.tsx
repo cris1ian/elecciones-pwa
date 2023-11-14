@@ -11,13 +11,16 @@ import "@fontsource/roboto/700.css";
 
 import Router from "screens/routes/Router";
 import ErrorBoundary from "screens/common/ErrorBoundary";
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
   return (
     <PrimeReactProvider>
       <ErrorBoundary>
         <div className="h-full">
-          <Router />
+          <BrowserRouter>
+            <Router />
+          </BrowserRouter>
         </div>
       </ErrorBoundary>
     </PrimeReactProvider>

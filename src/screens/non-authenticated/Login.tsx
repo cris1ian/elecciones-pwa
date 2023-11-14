@@ -8,10 +8,15 @@ import { PuntoMuestral, PuntoMuestralRaw } from "models/punto-muestral.model";
 import * as auth from "services/auth.service";
 import { ResponseType1 } from "services/auth.service";
 import { TiposPuntosMuestrales } from "constants/tipos-puntos-muestrales";
+import { allowOnlyNumbers } from "utils/keyboard-utils";
+import { useNavigate } from "react-router-dom";
+import * as Storage from "../../utils/storage";
 
 export function Login() {
+  const navigate = useNavigate();
+
   const toast = useRef<Toast>(null);
-  const [celular, setCelular] = useState<string | undefined>();
+  const [celular, setCelular] = useState<string>("");
   const [spinner, setSpinner] = React.useState<boolean>(false);
 
   const showMessage = (
@@ -98,7 +103,8 @@ export function Login() {
     const navigateTo: string =
       puntoMuestral.idTipo === TiposPuntosMuestrales.TD ? `home` : `reportes`;
 
-    //   navigation.navigate(navigateTo, { puntoMuestralId: puntoMuestral.id });
+    Storage.setObject("user", puntoMuestral.celular);
+    navigate(navigateTo, { state: { puntoMuestralId: puntoMuestral.id } });
   };
 
   return (
@@ -107,7 +113,7 @@ export function Login() {
       <div className="cris-title">Ingreso</div>
       <div className="flex flex-column justify-content-center align-items-center">
         <div className="cris-height-08 flex flex-column justify-content-center">
-          <div className="mb-5">
+          <div className="align-items-center flex flex-column mb-5">
             <label htmlFor="phone" className="font-bold block mb-2">
               Ingrese celular o código asignado
             </label>
@@ -118,6 +124,7 @@ export function Login() {
               pattern="[0-9]*"
               placeholder="341 123 4567"
               value={celular}
+              onKeyDown={allowOnlyNumbers}
               onChange={(event: ChangeEvent<HTMLInputElement>) => {
                 setCelular(event.target.value);
               }}

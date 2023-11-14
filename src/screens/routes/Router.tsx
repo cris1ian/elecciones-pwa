@@ -1,7 +1,11 @@
 import {
+  BrowserRouter,
   RouteObject,
   RouterProvider,
+  Routes,
   createBrowserRouter,
+  useLocation,
+  useRoutes,
 } from "react-router-dom";
 import { useEffect, useState } from "react";
 import * as Storage from "../../utils/storage";
@@ -12,12 +16,19 @@ import { Reports } from "screens/authenticated/Reportes";
 import NotFound from "screens/common/NotFound";
 
 export default function Router() {
+  let location = useLocation();
   const [authenticated, setAuthenticated] = useState<boolean>(false);
 
   useEffect(() => {
     const _user: any = Storage.getObject("user");
     setAuthenticated(Boolean(_user));
   }, []);
+
+  useEffect(() => {
+    const _user: any = Storage.getObject("user");
+    setAuthenticated(Boolean(_user));
+    console.log("location changed", location);
+  }, [location]);
 
   const publicRoutes: RouteObject[] = [
     { path: "/", element: <Login /> },
@@ -30,14 +41,8 @@ export default function Router() {
     { path: "/reportes", element: <Reports /> },
 
     // Not found routes work as you'd expect
-    { path: "*", element:  <NotFound />},
+    { path: "*", element: <NotFound /> },
   ];
 
-  return (
-    <RouterProvider
-      router={createBrowserRouter(
-        authenticated ? authenticatedRoutes : publicRoutes
-      )}
-    />
-  );
+  return useRoutes(authenticated ? authenticatedRoutes : publicRoutes);
 }
