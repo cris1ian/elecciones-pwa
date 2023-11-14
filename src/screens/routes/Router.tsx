@@ -1,48 +1,33 @@
-import {
-  BrowserRouter,
-  RouteObject,
-  RouterProvider,
-  Routes,
-  createBrowserRouter,
-  useLocation,
-  useRoutes,
-} from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Navigate, RouteObject, useRoutes } from "react-router-dom";
 import * as Storage from "../../utils/storage";
 import React from "react";
 import { Login } from "screens/non-authenticated/Login";
 import { Home } from "screens/authenticated/Home";
 import { Reports } from "screens/authenticated/Reportes";
 import NotFound from "screens/common/NotFound";
+import { TiposPuntosMuestrales } from "constants/tipos-puntos-muestrales";
 
 export default function Router() {
-  let location = useLocation();
-  const [authenticated, setAuthenticated] = useState<boolean>(false);
+  const resolveAuthentication = (): boolean => !!Storage.getObject("user");
 
-  useEffect(() => {
-    const _user: any = Storage.getObject("user");
-    setAuthenticated(Boolean(_user));
-  }, []);
-
-  useEffect(() => {
-    const _user: any = Storage.getObject("user");
-    setAuthenticated(Boolean(_user));
-    console.log("location changed", location);
-  }, [location]);
+  const resolveUserType = (): string =>
+    Storage.getObject("tipo") === `${TiposPuntosMuestrales.TD}` ? `/home` : `/reportes`;
 
   const publicRoutes: RouteObject[] = [
     { path: "/", element: <Login /> },
-    // Not found routes work as you'd expect
+
+    // Not found routes
     { path: "*", element: <NotFound /> },
   ];
 
   const authenticatedRoutes: RouteObject[] = [
     { path: "/home", element: <Home /> },
     { path: "/reportes", element: <Reports /> },
+    { path: "/", element: <Navigate to={resolveUserType()} /> },
 
-    // Not found routes work as you'd expect
+    // Not found routes
     { path: "*", element: <NotFound /> },
   ];
 
-  return useRoutes(authenticated ? authenticatedRoutes : publicRoutes);
+  return useRoutes(resolveAuthentication() ? authenticatedRoutes : publicRoutes);
 }

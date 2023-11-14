@@ -22,7 +22,6 @@ export const getCategoriasByMesaAndPuntoMuestral = async (idPuntoMuestral: numbe
 
     try {
         const resp: AxiosResponse<any> = await axios.get(ENDPOINT);
-        console.log(`${ENDPOINT}`, resp);
         return resp.data
     } catch (error) {
         return errorCatcher(error as any)
@@ -42,7 +41,6 @@ export const getMesasByPuntoMuestral = async (idPuntoMuestral: number): Promise<
 
     try {
         const resp: AxiosResponse<Mesa[]> = await axios.get(ENDPOINT);
-        console.log(`${ENDPOINT}`, resp);
         return resp.data
     } catch (error) {
         return errorCatcher(error as any)
@@ -61,7 +59,6 @@ export const getPuntoMuestralByCelular = async (celular: string): Promise<PuntoM
 
     try {
         const resp: AxiosResponse<PuntoMuestralRaw[]> = await axios.get(ENDPOINT);
-        console.log(`${ENDPOINT}`, resp);
         return resp.data
     } catch (error) {
         return errorCatcher(error as any)
@@ -80,7 +77,6 @@ export const getCandidatosByCategoria = async (idCategoria: number): Promise<Can
 
     try {
         const resp: AxiosResponse<Candidato[]> = await axios.get(ENDPOINT);
-        console.log(`${ENDPOINT}`, resp);
         return resp.data
     } catch (error) {
         return errorCatcher(error as any)
@@ -103,7 +99,6 @@ export const postMesasCandidatos = async (mesasCandidatos: MesaCandidato[], mesa
 
     try {
         const resp: AxiosResponse<any> = await axios.post(ENDPOINT, formData);
-        console.log(`${ENDPOINT}`, resp);
         return resp.data
     } catch (error) {
         return errorCatcher(error as any)
@@ -122,7 +117,6 @@ export const getResultados = async (idCategoria: any, idMesa: any): Promise<Resu
 
     try {
         const resp: AxiosResponse<Resultado[]> = await axios.get(ENDPOINT);
-        console.log(`${ENDPOINT}`, resp);
         const _mappedResp: Resultado[] = resp.data.map((elem: any) => new Resultado(elem));
         return _mappedResp
     } catch (error) {
@@ -144,7 +138,6 @@ export const getAllCategorias = async (): Promise<Categoria[] | undefined> => {
 
     try {
         const resp: AxiosResponse<Categoria[]> = await axios.get(ENDPOINT);
-        console.log(`${ENDPOINT}`, resp);
         return resp.data
     } catch (error) {
         return errorCatcher(error as any)
@@ -163,7 +156,6 @@ export const getAllMesas = async (): Promise<Mesa[] | undefined> => {
 
     try {
         const resp: AxiosResponse<Mesa[]> = await axios.get(ENDPOINT);
-        console.log(`${ENDPOINT}`, resp);
         return resp.data
     } catch (error) {
         return errorCatcher(error as any)
@@ -183,7 +175,6 @@ export const setRegistroIngreso = async (celular: string, newRegistroIngreso: bo
 
     try {
         const resp: AxiosResponse<any> = await axios.post(ENDPOINT, body);
-        console.log(`${ENDPOINT}`, resp);
         return resp.data
     } catch (error) {
         return errorCatcher(error as any)
@@ -205,7 +196,6 @@ export const getPuntosInformados = async (idCategoria: number): Promise<string |
 
     try {
         const resp: AxiosResponse<any> = await axios.get(ENDPOINT);
-        console.log(`${ENDPOINT}`, resp);
         const firstElem: any = (resp.data && resp.data.length > 0) ? resp.data[0][""] : '';
         return firstElem
         // return resp
@@ -231,7 +221,6 @@ export const getAllLocalidades = async (): Promise<string[] | undefined> => {
 
     try {
         const resp: AxiosResponse<string[]> = await axios.get(ENDPOINT);
-        console.log(`${ENDPOINT}`, resp);
         return resp.data
     } catch (error) {
         return errorCatcher(error as any)

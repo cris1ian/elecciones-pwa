@@ -19,11 +19,7 @@ export function Login() {
   const [celular, setCelular] = useState<string>("");
   const [spinner, setSpinner] = React.useState<boolean>(false);
 
-  const showMessage = (
-    title: string,
-    message: string,
-    severity?: ToastMessageOptions["severity"]
-  ) => {
+  const showMessage = (title: string, message: string, severity?: ToastMessageOptions["severity"]) => {
     if (toast.current === null) return;
     toast.current.show({
       severity: severity || "info",
@@ -32,9 +28,7 @@ export function Login() {
     });
   };
 
-  const getPuntoMuestral = async (
-    _celular: string
-  ): Promise<PuntoMuestralRaw | undefined> => {
+  const getPuntoMuestral = async (_celular: string): Promise<PuntoMuestralRaw | undefined> => {
     let resp: PuntoMuestralRaw[] | undefined;
     try {
       setSpinner(true);
@@ -45,8 +39,7 @@ export function Login() {
       return undefined;
     }
     setSpinner(false);
-    if (!resp || !resp[0])
-      showMessage("Error", "No se halló el número ingresado", "error");
+    if (!resp || !resp[0]) showMessage("Error", "No se halló el número ingresado", "error");
     return resp?.[0];
   };
 
@@ -68,42 +61,33 @@ export function Login() {
   };
 
   const onClickReportarPresencia = async () => {
-    if (!celular)
-      return showMessage("Error", "No se ingresó un número válido", "error");
+    if (!celular) return showMessage("Error", "No se ingresó un número válido", "error");
 
     const resp1: PuntoMuestralRaw | undefined = await getPuntoMuestral(celular);
     if (!resp1) return;
     const puntoMuestral: PuntoMuestral = new PuntoMuestral(resp1);
 
-    if (puntoMuestral.registroIngreso)
-      return showMessage("Info", "Usted ya ha reportado su presencia");
+    if (puntoMuestral.registroIngreso) return showMessage("Info", "Usted ya ha reportado su presencia");
 
     setRegistroDeIngreso(celular);
   };
 
   const onClickIngresar = async () => {
-    if (!celular)
-      return showMessage("Error", "No se ingresó un número válido", "error");
+    if (!celular) return showMessage("Error", "No se ingresó un número válido", "error");
 
     const resp1: PuntoMuestralRaw | undefined = await getPuntoMuestral(celular);
     if (!resp1) return;
     const puntoMuestral: PuntoMuestral = new PuntoMuestral(resp1);
 
-    const faltaReportar: boolean =
-      puntoMuestral.idTipo === TiposPuntosMuestrales.TD &&
-      !puntoMuestral.registroIngreso;
+    const faltaReportar: boolean = puntoMuestral.idTipo === TiposPuntosMuestrales.TD && !puntoMuestral.registroIngreso;
 
     /** Analizar aquí la posiblidad de hacer el reporte de presencia de forma automática */
-    if (faltaReportar)
-      return showMessage(
-        "Info",
-        "Antes de ingresar debe reportar su presencia"
-      );
+    if (faltaReportar) return showMessage("Info", "Antes de ingresar debe reportar su presencia");
 
-    const navigateTo: string =
-      puntoMuestral.idTipo === TiposPuntosMuestrales.TD ? `home` : `reportes`;
+    const navigateTo: string = puntoMuestral.idTipo === TiposPuntosMuestrales.TD ? `home` : `reportes`;
 
     Storage.setObject("user", puntoMuestral.celular);
+    Storage.setObject("tipo", puntoMuestral.idTipo);
     navigate(navigateTo, { state: { puntoMuestralId: puntoMuestral.id } });
   };
 
@@ -112,7 +96,7 @@ export function Login() {
       <Toast ref={toast} position="bottom-center" />
       <div className="cris-title">Ingreso</div>
       <div className="flex flex-column justify-content-center align-items-center">
-        <div className="cris-height-08 flex flex-column justify-content-center">
+        <div className={classNames(styles.inputHeight, "cris-height-08 flex flex-column justify-content-center")}>
           <div className="align-items-center flex flex-column mb-5">
             <label htmlFor="phone" className="font-bold block mb-2">
               Ingrese celular o código asignado
@@ -120,7 +104,7 @@ export function Login() {
             <InputText
               className={styles.mainInput}
               id="phone"
-              type="tel"
+              type="number"
               pattern="[0-9]*"
               placeholder="341 123 4567"
               value={celular}

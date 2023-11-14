@@ -1,0 +1,48 @@
+@import "global.scss";
+
+.noData {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.crisColor {
+    color: $cris-custom-color-1;
+}
+
+.loadingContainer {
+    height: 6px;
+}
+
+/** Componente CandidatosDisplay */
+
+.nombre {
+    font-size: large;
+    font-weight: 500;
+    white-space: pre-line;
+    flex-grow: 1;
+}
+
+.votos {
+    color: #888;
+    vertical-align: baseline;
+
+    .title {
+        padding-left: 5%;
+        width: 20%;
+        font-size: small;
+    }
+    .value {
+        padding-left: 5px;
+        width: 30%;
+        font-size: medium;
+    }
+}
+
+.porcentaje {
+    font-size: x-large;
+    font-weight: bold;
+    text-align: right;
+}
