@@ -7,7 +7,7 @@ import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
 import { Toast } from "primereact/toast";
 import React, { useEffect, useRef, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { validarDatos } from "screens/common/ValidarDatos";
 import { logout } from "screens/common/utils";
 import * as auth from "services/auth.service";
@@ -16,11 +16,10 @@ import styles from "./Carga.module.scss";
 
 export function CargaDeDatos() {
   const navigate = useNavigate();
-  const location = useLocation();
   const toast = useRef<Toast>(null);
 
   /** ID de Punto Muestral */
-  const puntoMuestralId: string | undefined = location?.state?.puntoMuestralId;
+  let { puntoMuestralId } = useParams();
 
   const [spinner, setSpinner] = useState<boolean>(false);
 

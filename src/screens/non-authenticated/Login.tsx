@@ -69,11 +69,12 @@ export function Login() {
 
     if (!puntoMuestral.registroIngreso) await setRegistroDeIngreso(celular);
 
-    const navigateTo: string = puntoMuestral.idTipo === TiposPuntosMuestrales.TD ? `home` : `reportes`;
+    const navigateTo: string =
+      puntoMuestral.idTipo === TiposPuntosMuestrales.TD ? `home/${puntoMuestral.id}` : `reportes`;
 
     Storage.setObject("user", puntoMuestral.celular);
     Storage.setObject("tipo", puntoMuestral.idTipo);
-    navigate(navigateTo, { state: { puntoMuestralId: puntoMuestral.id } });
+    navigate(navigateTo);
   };
 
   return (

@@ -21,7 +21,7 @@ export default function Router() {
   ];
 
   const authenticatedRoutes: RouteObject[] = [
-    { path: "/home", element: <CargaDeDatos /> },
+    { path: "/home/:puntoMuestralId", element: <CargaDeDatos /> },
     { path: "/reportes", element: <Reports /> },
     { path: "/", element: <Navigate to={resolveUserType()} /> },
 
