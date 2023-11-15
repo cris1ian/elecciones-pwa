@@ -15,18 +15,19 @@ export const validarDatos = (mesasCandidatos: MesaCandidato[], toastRef: RefObje
   //     return false
   // }
 
-  // RN: Candidato total votos tiene que ser menor o igual a 350
+  // Regla de Negocio:
+  // Candidato total votos tiene que ser menor o igual a 350
   const candidatoTotalVotos: MesaCandidato | undefined = mesasCandidatos.find(
     (mc) => mc.candidato.candidatoTipo === candidatosTipos.TOTAL_VOTOS
   );
 
   if (candidatoTotalVotos === undefined || candidatoTotalVotos === null) {
-    showToastMessage("Error", `candidatoTotalVotos no está definido o es null`, toastRef, "warn");
+    showToastMessage("Error", `Falta Total de Votos Candidato`, toastRef, "warn");
     return false;
   }
 
   if (candidatoTotalVotos.cantidadVotos === undefined || candidatoTotalVotos.cantidadVotos === null) {
-    showToastMessage("Error", `Total de Votos Candidato es null`, toastRef, "warn");
+    showToastMessage("Error", `Falta Total de Votos Candidato`, toastRef, "warn");
     return false;
   }
 
@@ -35,7 +36,8 @@ export const validarDatos = (mesasCandidatos: MesaCandidato[], toastRef: RefObje
     return false;
   }
 
-  // RN: Sumatoria candidatos exceptuando total votos y total votos validos
+  // Regla de Negocio:
+  // Sumatoria candidatos exceptuando total votos y total votos validos
   const sumTotalVotos: number = mesasCandidatos
     .filter(
       (mc) =>
@@ -44,7 +46,8 @@ export const validarDatos = (mesasCandidatos: MesaCandidato[], toastRef: RefObje
     )
     .reduce((acc, mc) => acc + Number(mc.cantidadVotos), 0);
 
-  // RN: Los votos no pueden superar el Maximo de votos (350)
+  // Regla de Negocio:
+  // Los votos no pueden superar el Maximo de votos (350)
   if (sumTotalVotos > MAX_VOTOS) {
     showToastMessage(
       "Error",
@@ -60,32 +63,35 @@ export const validarDatos = (mesasCandidatos: MesaCandidato[], toastRef: RefObje
   );
 
   if (candidatoTotalVotosValido === undefined || candidatoTotalVotosValido === null) {
-    showToastMessage("Error", `candidatoTotalVotos no está definido o es null`, toastRef, "warn");
+    showToastMessage("Error", `Falta Total de Votos Candidato`, toastRef, "warn");
     return false;
   }
 
   if (candidatoTotalVotosValido.cantidadVotos === undefined || candidatoTotalVotosValido.cantidadVotos === null) {
-    showToastMessage("Error", `Total de Votos Candidato es null`, toastRef, "warn");
+    showToastMessage("Error", `Falta Total de Votos Candidato`, toastRef, "warn");
     return false;
   }
 
-  // RN: Candidato Total Votos Valido tiene que ser <= a Total votos // Esta condición aplicaba en la versión 2019
+  // Regla de Negocio:
+  // Candidato Total Votos Valido tiene que ser <= a Total votos // Esta condición aplicaba en la versión 2019
   // if (candidatoTotalVotosValido.cantidadVotos > candidatoTotalVotos.cantidadVotos) {
   //     showToastMessage('Error', `Total Votos Valido tiene que ser mayor o igual a la suma de los votos de los candidatos`,toastRef,"warn");
   //     return false;
   // }
 
-  // RN: Candidato Total Votos Valido tiene que ser = a Total votos.
+  // Regla de Negocio:
+  // Candidato Total Votos Valido tiene que ser = a Total votos.
   // En la versión 2021 usamos el campo para rechequear que no le haya errado en la carga
   // No representa el valor de votos validos y totales sino el mismo campo por duplicado
-  if (candidatoTotalVotosValido.cantidadVotos != candidatoTotalVotos.cantidadVotos) {
-    showToastMessage("Error", `La cantidad de Votos y Votos(repetir) no coinciden`, toastRef, "warn");
+  if (candidatoTotalVotosValido.cantidadVotos !== candidatoTotalVotos.cantidadVotos) {
+    showToastMessage("Error", `La cantidad de Votos y Votos (repetir) no coinciden`, toastRef, "warn");
     return false;
   }
 
-  // RN: Candidato Total Votos Valido tiene que ser >= a la suma de los votos de los candidatos
+  // Regla de Negocio:
+  // Candidato Total Votos Valido tiene que ser >= a la suma de los votos de los candidatos
   if (candidatoTotalVotosValido.cantidadVotos < sumTotalVotos) {
-    showToastMessage("Error", `Total Votos Valido tiene que ser menor o igual a Total votos`, toastRef, "warn");
+    showToastMessage("Error", `La suma de votos válidos excede al total de votos`, toastRef, "warn");
     return false;
   }
 

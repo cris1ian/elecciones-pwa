@@ -60,29 +60,14 @@ export function Login() {
     showMessage(resp.body, resp.status, "success");
   };
 
-  const onClickReportarPresencia = async () => {
-    if (!celular) return showMessage("Error", "No se ingresó un número válido", "error");
-
-    const resp1: PuntoMuestralRaw | undefined = await getPuntoMuestral(celular);
-    if (!resp1) return;
-    const puntoMuestral: PuntoMuestral = new PuntoMuestral(resp1);
-
-    if (puntoMuestral.registroIngreso) return showMessage("Info", "Usted ya ha reportado su presencia");
-
-    setRegistroDeIngreso(celular);
-  };
-
   const onClickIngresar = async () => {
     if (!celular) return showMessage("Error", "No se ingresó un número válido", "error");
 
-    const resp1: PuntoMuestralRaw | undefined = await getPuntoMuestral(celular);
-    if (!resp1) return;
-    const puntoMuestral: PuntoMuestral = new PuntoMuestral(resp1);
+    const resp: PuntoMuestralRaw | undefined = await getPuntoMuestral(celular);
+    if (!resp) return;
+    const puntoMuestral: PuntoMuestral = new PuntoMuestral(resp);
 
-    const faltaReportar: boolean = puntoMuestral.idTipo === TiposPuntosMuestrales.TD && !puntoMuestral.registroIngreso;
-
-    /** Analizar aquí la posiblidad de hacer el reporte de presencia de forma automática */
-    if (faltaReportar) return showMessage("Info", "Antes de ingresar debe reportar su presencia");
+    if (!puntoMuestral.registroIngreso) await setRegistroDeIngreso(celular);
 
     const navigateTo: string = puntoMuestral.idTipo === TiposPuntosMuestrales.TD ? `home` : `reportes`;
 
@@ -115,14 +100,14 @@ export function Login() {
             ></InputText>
           </div>
         </div>
-        <Button
+        {/* <Button
           className={classNames("mb-3", styles.button)}
           label="Reportar Presencia"
           outlined
           onClick={onClickReportarPresencia}
           disabled={!celular}
           loading={spinner}
-        />
+        /> */}
         <Button
           className={classNames("mb-3", styles.button)}
           label="Ingresar"
