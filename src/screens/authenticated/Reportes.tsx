@@ -1,5 +1,4 @@
 import { Categoria } from "models/categoria.model";
-import { Mesa } from "models/mesa.model";
 import { Resultado } from "models/resultado.model";
 import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
 import { Toast } from "primereact/toast";
@@ -19,7 +18,6 @@ export function Reports() {
   const [spinner, setSpinner] = React.useState<boolean>(false);
 
   /** Listas de Datos */
-  const [mesas, setMesas] = React.useState<Mesa[]>([]);
   const [categorias, setCategorias] = React.useState<Categoria[]>([]);
   const [localidades, setLocalidades] = React.useState<string[]>([]);
 
@@ -33,13 +31,14 @@ export function Reports() {
 
   useEffect(() => {
     getAllCategorias();
-    getAllMesas();
     getAllLocalidades();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     if (categorias.length === 0) return;
     refrescarLista(categoria ? categoria : categorias[0], localidadSeleccionada);
+    // eslint-disable-next-line
   }, [categoria, localidadSeleccionada]);
 
   const getAllCategorias = async () => {
@@ -56,17 +55,6 @@ export function Reports() {
     if (resp.length > 0) setCategoria(resp[0]);
     const categoriaDefault: Categoria = resp[0];
     refrescarLista(categoriaDefault);
-  };
-
-  const getAllMesas = async () => {
-    let resp;
-    try {
-      resp = await auth.getAllMesas();
-    } catch (error) {
-      return showToastMessage("Error", JSON.stringify(error), toast, "error");
-    }
-    if (!resp) return;
-    setMesas(resp);
   };
 
   const getAllLocalidades = async () => {

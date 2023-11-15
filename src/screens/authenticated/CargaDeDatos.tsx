@@ -35,15 +35,18 @@ export function CargaDeDatos() {
   useEffect(() => {
     if (!puntoMuestralId) return;
     getMesasByPuntoMuestral();
+    // eslint-disable-next-line
   }, [puntoMuestralId]);
 
   useEffect(() => {
     if (!mesa) return;
     onChangeMesa(mesa);
+    // eslint-disable-next-line
   }, [mesa]);
 
   useEffect(() => {
     onChangeCategoria(categoria);
+    // eslint-disable-next-line
   }, [categoria]);
 
   const clearAll = (excepMesa = false) => {
@@ -192,6 +195,7 @@ export function CargaDeDatos() {
                 onClick={onClickConfirmar}
                 disabled={spinner || !categoria}
                 loading={spinner}
+                rounded
               />
             </div>
           </>
