@@ -89,7 +89,6 @@ export function Login() {
             </label>
             <InputText
               className={styles.mainInput}
-              id="phone"
               type="number"
               pattern="[0-9]*"
               placeholder="341 123 4567"
@@ -104,6 +103,7 @@ export function Login() {
         {/* <Button
           className={classNames("mb-3", styles.button)}
           label="Reportar Presencia"
+          rounded
           outlined
           onClick={onClickReportarPresencia}
           disabled={!celular}
@@ -111,6 +111,7 @@ export function Login() {
         /> */}
         <Button
           className={classNames("mb-3", styles.button)}
+          rounded
           label="Ingresar"
           onClick={onClickIngresar}
           disabled={!celular}

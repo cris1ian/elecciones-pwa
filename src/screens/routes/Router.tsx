@@ -26,7 +26,7 @@ export default function Router() {
     { path: "/", element: <Navigate to={resolveUserType()} /> },
 
     // Not found routes
-    { path: "*", element: <NotFound /> },
+    { path: "*", element: <NotFound isAuthenticated /> },
   ];
 
   return useRoutes(resolveAuthentication() ? authenticatedRoutes : publicRoutes);

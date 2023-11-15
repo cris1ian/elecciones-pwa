@@ -144,9 +144,7 @@ export function CargaDeDatos() {
     setMesasCandidatos(_editedMesasCandidatos);
   };
 
-  const doLogout = () => {
-    logout(navigate);
-  };
+  const doLogout = () => logout(navigate);
 
   return (
     <div>

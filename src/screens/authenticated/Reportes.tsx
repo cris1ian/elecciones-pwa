@@ -120,9 +120,7 @@ export function Reports() {
     getResultados(_categoria, _localidad);
   };
 
-  const doLogout = () => {
-    logout(navigate);
-  };
+  const doLogout = () => logout(navigate);
 
   return (
     <div>
