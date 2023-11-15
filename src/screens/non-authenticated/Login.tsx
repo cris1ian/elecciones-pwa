@@ -80,27 +80,28 @@ export function Login() {
   return (
     <div className="h-full">
       <Toast ref={toast} position="bottom-center" />
-      <div className="cris-title">Ingreso</div>
-      <div className="flex flex-column justify-content-center align-items-center">
-        <div className={classNames(styles.inputHeight, "cris-height-08 flex flex-column justify-content-center")}>
-          <div className="align-items-center flex flex-column mb-5">
-            <label htmlFor="phone" className="font-bold block mb-2">
-              Ingrese celular o código asignado
-            </label>
-            <InputText
-              className={styles.mainInput}
-              type="number"
-              pattern="[0-9]*"
-              placeholder="341 123 4567"
-              value={celular}
-              onKeyDown={allowOnlyNumbers}
-              onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                setCelular(event.target.value);
-              }}
-            ></InputText>
+      <div className="main-header">Ingreso</div>
+      <div className="desktop-wrapper">
+        <div className="flex flex-column justify-content-center align-items-center">
+          <div className={classNames(styles.inputHeight, "cris-height-08 flex flex-column justify-content-center")}>
+            <div className="align-items-center flex flex-column mb-5">
+              <label htmlFor="phone" className="font-bold block mb-2">
+                Ingrese celular o código asignado
+              </label>
+              <InputText
+                className={styles.mainInput}
+                type="number"
+                pattern="[0-9]*"
+                placeholder="341 123 4567"
+                value={celular}
+                onKeyDown={allowOnlyNumbers}
+                onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                  setCelular(event.target.value);
+                }}
+              ></InputText>
+            </div>
           </div>
-        </div>
-        {/* <Button
+          {/* <Button
           className={classNames("mb-3", styles.button)}
           label="Reportar Presencia"
           rounded
@@ -109,14 +110,15 @@ export function Login() {
           disabled={!celular}
           loading={spinner}
         /> */}
-        <Button
-          className={classNames("mb-3", styles.button)}
-          rounded
-          label="Ingresar"
-          onClick={onClickIngresar}
-          disabled={!celular}
-          loading={spinner}
-        />
+          <Button
+            className={classNames("mb-3", styles.button)}
+            rounded
+            label="Ingresar"
+            onClick={onClickIngresar}
+            disabled={!celular}
+            loading={spinner}
+          />
+        </div>
       </div>
     </div>
   );

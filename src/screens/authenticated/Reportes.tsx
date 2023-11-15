@@ -125,7 +125,7 @@ export function Reports() {
   return (
     <div>
       <ConfirmDialog />
-      <div className="cris-title">
+      <div className="main-header">
         Resumen de resultados
         <Button onClick={doLogout} style={{ color: "white" }} icon="pi pi-sign-out" rounded text outlined />
       </div>
@@ -134,42 +134,44 @@ export function Reports() {
         {spinner ? <ProgressBar mode="indeterminate" color={"#2089dc"} style={{ height: "6px" }}></ProgressBar> : null}
       </div>
 
-      <div className="flex flex-column justify-content-center align-items-center p-3">
-        <Toast ref={toast} position="bottom-center" />
-        <Dropdown
-          value={categoria}
-          onChange={(e: DropdownChangeEvent) => setCategoria(e.value)}
-          options={categorias}
-          optionLabel="descripcion"
-          placeholder="Seleccione categoría"
-          className="w-full mb-3"
-          emptyFilterMessage="No hay coincidencias"
-          emptyMessage="No hay resultados"
-        />
-        <Dropdown
-          filter
-          showClear
-          value={localidadSeleccionada}
-          onChange={(e: DropdownChangeEvent) => setLocalidadSeleccionada(e.value)}
-          options={localidades}
-          placeholder="Filtrar por ciudad"
-          className="w-full mb-3"
-          emptyFilterMessage="No hay coincidencias"
-          emptyMessage="No hay resultados"
-        />
-      </div>
+      <div className="desktop-wrapper">
+        <div className="flex flex-column justify-content-center align-items-center p-3">
+          <Toast ref={toast} position="bottom-center" />
+          <Dropdown
+            value={categoria}
+            onChange={(e: DropdownChangeEvent) => setCategoria(e.value)}
+            options={categorias}
+            optionLabel="descripcion"
+            placeholder="Seleccione categoría"
+            className="w-full mb-3"
+            emptyFilterMessage="No hay coincidencias"
+            emptyMessage="No hay resultados"
+          />
+          <Dropdown
+            filter
+            showClear
+            value={localidadSeleccionada}
+            onChange={(e: DropdownChangeEvent) => setLocalidadSeleccionada(e.value)}
+            options={localidades}
+            placeholder="Filtrar por ciudad"
+            className="w-full mb-3"
+            emptyFilterMessage="No hay coincidencias"
+            emptyMessage="No hay resultados"
+          />
+        </div>
 
-      <div className="px-3 flex justify-content-between align-items-center">
-        {puntosInformadosMsg}
-        <Button onClick={() => refrescarLista()} icon="pi pi-refresh" rounded loading={spinner} />
-      </div>
+        <div className="px-3 flex justify-content-between align-items-center">
+          {puntosInformadosMsg}
+          <Button onClick={() => refrescarLista()} icon="pi pi-refresh" rounded loading={spinner} />
+        </div>
 
-      <div className="p-3">
-        {resultados.length === 0 ? <div className={styles.noData}>Aún no hay {"\n"} información cargada</div> : null}
+        <div className="p-3">
+          {resultados.length === 0 ? <div className={styles.noData}>Aún no hay {"\n"} información cargada</div> : null}
 
-        {resultados.map((elem: Resultado) => (
-          <CandidatoDisplay candidato={elem} key={elem.candidatoNombre} />
-        ))}
+          {resultados.map((elem: Resultado) => (
+            <CandidatoDisplay candidato={elem} key={elem.candidatoNombre} />
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -149,52 +149,54 @@ export function CargaDeDatos() {
   return (
     <div>
       <ConfirmDialog />
-      <div className="cris-title">
+      <div className="main-header">
         Ingreso de resultados
         <Button onClick={doLogout} style={{ color: "white" }} icon="pi pi-sign-out" rounded text outlined />
       </div>
 
-      <div className="flex flex-column justify-content-center align-items-center p-3">
-        <Toast ref={toast} position="bottom-center" />
-        <Dropdown
-          value={mesa}
-          onChange={(e: DropdownChangeEvent) => setMesa(e.value)}
-          options={mesas}
-          optionLabel="descripcion"
-          placeholder="Seleccione mesa"
-          className="w-full mb-3"
-          emptyMessage="No hay resultados"
-        />
-        <Dropdown
-          value={categoria}
-          onChange={(e: DropdownChangeEvent) => setCategoria(e.value)}
-          options={categorias}
-          optionLabel="descripcion"
-          placeholder="Seleccione categoria"
-          className="w-full mb-3"
-          emptyMessage="No hay resultados"
-        />
-      </div>
+      <div className="desktop-wrapper">
+        <div className="flex flex-column justify-content-center align-items-center p-3">
+          <Toast ref={toast} position="bottom-center" />
+          <Dropdown
+            value={mesa}
+            onChange={(e: DropdownChangeEvent) => setMesa(e.value)}
+            options={mesas}
+            optionLabel="descripcion"
+            placeholder="Seleccione mesa"
+            className="w-full mb-3"
+            emptyMessage="No hay resultados"
+          />
+          <Dropdown
+            value={categoria}
+            onChange={(e: DropdownChangeEvent) => setCategoria(e.value)}
+            options={categorias}
+            optionLabel="descripcion"
+            placeholder="Seleccione categoria"
+            className="w-full mb-3"
+            emptyMessage="No hay resultados"
+          />
+        </div>
 
-      {mesasCandidatos.length > 0 && (
-        <>
-          <div className={styles.sectionTitle}>Ingrese cantidad de votos</div>
-          <div className="p-3">
-            {mesasCandidatos.map((elem: MesaCandidato) => (
-              <CargaCandidato mesaCandidato={elem} setVotos={setCantidadVotos} key={elem.candidato.id} />
-            ))}
-          </div>
-          <div className="mb-5 flex justify-content-center">
-            <Button
-              className={styles.button}
-              label="Confirmar"
-              onClick={onClickConfirmar}
-              disabled={spinner || !categoria}
-              loading={spinner}
-            />
-          </div>
-        </>
-      )}
+        {mesasCandidatos.length > 0 && (
+          <>
+            <div className={styles.sectionTitle}>Ingrese cantidad de votos</div>
+            <div className="p-3">
+              {mesasCandidatos.map((elem: MesaCandidato) => (
+                <CargaCandidato mesaCandidato={elem} setVotos={setCantidadVotos} key={elem.candidato.id} />
+              ))}
+            </div>
+            <div className="mb-5 flex justify-content-center">
+              <Button
+                className={styles.button}
+                label="Confirmar"
+                onClick={onClickConfirmar}
+                disabled={spinner || !categoria}
+                loading={spinner}
+              />
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 }

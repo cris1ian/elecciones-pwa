@@ -3,7 +3,7 @@ import { Avatar } from "primereact/avatar";
 import { ProgressBar } from "primereact/progressbar";
 import React from "react";
 import styles from "./Reportes.module.scss";
-import { formatNumber, splitName } from "screens/common/utils";
+import { formatNumber, formatPercentage, splitName } from "screens/common/utils";
 
 interface Props {
   candidato: Resultado;
@@ -27,7 +27,7 @@ export function CandidatoDisplay(props: Props) {
         <div className="flex flex-column w-full">
           <div className="px-3 flex flex-grow justify-content-center align-items-center">
             <div className={styles.nombre}>{splitName(props.candidato.candidatoNombre)}</div>
-            <div className={styles.porcentaje}>{props.candidato.porcentaje}%</div>
+            <div className={styles.porcentaje}>{formatPercentage(props.candidato.porcentaje)}%</div>
           </div>
           <div className={styles.votos}>
             <span className={styles.title}>Votos:</span>

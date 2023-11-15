@@ -6,6 +6,7 @@ import { RefObject } from "react";
 
 export const splitName = (value: string): string => value.replace(/\(/g, "\n").replace(/\)/g, "");
 export const formatNumber = (value: number): string => value.toLocaleString("es-AR");
+export const formatPercentage = (value: number): string => value.toFixed(2);
 
 export const logout = (navigate: NavigateFunction, dontAsk?: boolean): void => {
 
