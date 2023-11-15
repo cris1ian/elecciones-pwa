@@ -1,6 +1,6 @@
 import { MesaCandidato } from "models/mesa-candidato.model";
 import { Avatar } from "primereact/avatar";
-import React, { useState } from "react";
+import React from "react";
 import styles from "./Carga.module.scss";
 import { InputNumber, InputNumberValueChangeEvent } from "primereact/inputnumber";
 import { classNames } from "primereact/utils";

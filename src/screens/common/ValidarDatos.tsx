@@ -1,9 +1,9 @@
-import candidatosTipos from "constants/candidatos-tipos";
 import { MesaCandidato } from "models/mesa-candidato.model";
 import { Toast } from "primereact/toast";
 import { RefObject } from "react";
 import { showToastMessage } from "./utils";
 import { MAX_VOTOS } from "constants/reglas-de-negocio";
+import { CandidatosTipo } from "constants/candidatos-tipos";
 
 /** Valido los datos antes de enviarlos */
 export const validarDatos = (mesasCandidatos: MesaCandidato[], toastRef: RefObject<Toast>): boolean => {
@@ -18,7 +18,7 @@ export const validarDatos = (mesasCandidatos: MesaCandidato[], toastRef: RefObje
   // Regla de Negocio:
   // Candidato total votos tiene que ser menor o igual a 350
   const candidatoTotalVotos: MesaCandidato | undefined = mesasCandidatos.find(
-    (mc) => mc.candidato.candidatoTipo === candidatosTipos.TOTAL_VOTOS
+    (mc) => mc.candidato.candidatoTipo === CandidatosTipo.TOTAL_VOTOS
   );
 
   if (candidatoTotalVotos === undefined || candidatoTotalVotos === null) {
@@ -41,8 +41,8 @@ export const validarDatos = (mesasCandidatos: MesaCandidato[], toastRef: RefObje
   const sumTotalVotos: number = mesasCandidatos
     .filter(
       (mc) =>
-        mc.candidato.candidatoTipo !== candidatosTipos.TOTAL_VOTOS &&
-        mc.candidato.candidatoTipo !== candidatosTipos.TOTAL_VOTOS_VALIDO
+        mc.candidato.candidatoTipo !== CandidatosTipo.TOTAL_VOTOS &&
+        mc.candidato.candidatoTipo !== CandidatosTipo.TOTAL_VOTOS_VALIDO
     )
     .reduce((acc, mc) => acc + Number(mc.cantidadVotos), 0);
 
@@ -59,7 +59,7 @@ export const validarDatos = (mesasCandidatos: MesaCandidato[], toastRef: RefObje
   }
 
   const candidatoTotalVotosValido: MesaCandidato | undefined = mesasCandidatos.find(
-    (mc) => mc.candidato.candidatoTipo === candidatosTipos.TOTAL_VOTOS_VALIDO
+    (mc) => mc.candidato.candidatoTipo === CandidatosTipo.TOTAL_VOTOS_VALIDO
   );
 
   if (candidatoTotalVotosValido === undefined || candidatoTotalVotosValido === null) {
