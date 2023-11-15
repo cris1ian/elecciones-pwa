@@ -2,7 +2,7 @@ import { Categoria } from "models/categoria.model";
 import { Mesa } from "models/mesa.model";
 import { Resultado } from "models/resultado.model";
 import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
-import { Toast, ToastMessageOptions } from "primereact/toast";
+import { Toast } from "primereact/toast";
 import React, { useEffect, useRef } from "react";
 import * as auth from "services/auth.service";
 import styles from "./Reportes.module.scss";
@@ -10,7 +10,7 @@ import { CandidatoDisplay } from "./CandidatoDisplay";
 import { ProgressBar } from "primereact/progressbar";
 import { Button } from "primereact/button";
 import { ConfirmDialog } from "primereact/confirmdialog";
-import { logout } from "screens/common/utils";
+import { logout, showToastMessage } from "screens/common/utils";
 import { useNavigate } from "react-router-dom";
 
 export function Reports() {
@@ -42,21 +42,12 @@ export function Reports() {
     refrescarLista(categoria ? categoria : categorias[0], localidadSeleccionada);
   }, [categoria, localidadSeleccionada]);
 
-  const showMessage = (title: string, message: string, severity?: ToastMessageOptions["severity"]) => {
-    if (toast.current === null) return;
-    toast.current.show({
-      severity: severity || "info",
-      summary: title,
-      detail: message,
-    });
-  };
-
   const getAllCategorias = async () => {
     let resp;
     try {
       resp = await auth.getAllCategorias();
     } catch (error: any) {
-      return showMessage("Error", JSON.stringify(error), "error");
+      return showToastMessage("Error", JSON.stringify(error), toast, "error");
     }
     if (!resp) return;
     setCategorias(resp);
@@ -72,7 +63,7 @@ export function Reports() {
     try {
       resp = await auth.getAllMesas();
     } catch (error) {
-      return showMessage("Error", JSON.stringify(error), "error");
+      return showToastMessage("Error", JSON.stringify(error), toast, "error");
     }
     if (!resp) return;
     setMesas(resp);
@@ -96,7 +87,7 @@ export function Reports() {
       setSpinner(true);
       resp = await auth.getPuntosInformados(_categoria?.id || 0);
     } catch (error) {
-      showMessage("Error", JSON.stringify(error), "error");
+      showToastMessage("Error", JSON.stringify(error), toast, "error");
       setSpinner(false);
       return;
     }
@@ -112,7 +103,7 @@ export function Reports() {
       setSpinner(true);
       resp = await auth.getResultados(_categoria ? _categoria.id : 0, _localidadDefinida ? _localidad : 0);
     } catch (error) {
-      showMessage("Error", JSON.stringify(error), "error");
+      showToastMessage("Error", JSON.stringify(error), toast, "error");
       setSpinner(false);
       return;
     }

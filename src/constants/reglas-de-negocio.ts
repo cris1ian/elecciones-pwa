@@ -1,0 +1,1 @@
+export const MAX_VOTOS = 350;

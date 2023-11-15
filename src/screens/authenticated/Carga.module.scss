@@ -1,0 +1,33 @@
+@import "global.scss";
+
+.sectionTitle {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 1rem;
+}
+
+.button {
+    width: 60%;
+}
+
+/** Subcomponente del candidato */
+
+.cargaCandidatoContainer {
+    border-radius: 50px;
+}
+
+.avatar {
+    transform: scale(1.08);
+}
+
+.nombre {
+    font-weight: 500;
+    white-space: pre-line;
+    flex-grow: 1;
+}
+
+.votesInput {
+    width: 100px;
+}

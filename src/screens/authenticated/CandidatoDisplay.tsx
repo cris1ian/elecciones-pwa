@@ -3,15 +3,13 @@ import { Avatar } from "primereact/avatar";
 import { ProgressBar } from "primereact/progressbar";
 import React from "react";
 import styles from "./Reportes.module.scss";
-import { classNames } from "primereact/utils";
+import { formatNumber, splitName } from "screens/common/utils";
 
 interface Props {
   candidato: Resultado;
 }
 
 export function CandidatoDisplay(props: Props) {
-  const splitName = (value: string): string => value.replace(/\(/g, "\n").replace(/\)/g, "");
-  const formatNumber = (value: number): string => value.toLocaleString("es-AR");
 
   return (
     <div className="pb-3">
