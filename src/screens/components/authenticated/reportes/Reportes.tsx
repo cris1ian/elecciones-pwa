@@ -62,7 +62,6 @@ export function Reports() {
     try {
       resp = await auth.getAllLocalidades();
     } catch (error) {
-      console.log(error);
       return;
     }
     if (!resp) return;
@@ -124,8 +123,9 @@ export function Reports() {
 
       <div className="desktop-wrapper">
         <div className="flex flex-column justify-content-center align-items-center p-3">
-          <Toast ref={toast} position="bottom-center" />
+          <Toast ref={toast} position="top-center" />
           <Dropdown
+            disabled
             value={categoria}
             onChange={(e: DropdownChangeEvent) => setCategoria(e.value)}
             options={categorias}

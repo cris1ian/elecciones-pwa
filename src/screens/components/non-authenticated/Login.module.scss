@@ -1,0 +1,23 @@
+.inputHeight {
+    height: 30vh;
+}
+
+.mainInput {
+    text-align: center;
+    font-size: xx-large;
+}
+
+.button {
+    width: 60%;
+}
+
+.floatingEyeball {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    span {
+        font-size: 1.5rem;
+        color: #b5b5b5;
+    }
+}

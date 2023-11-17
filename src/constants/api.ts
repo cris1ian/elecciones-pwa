@@ -1,8 +1,12 @@
 const useLocalBackend: boolean = true;
 
-const localhost: string = 'http://192.168.0.8:3001';
-const staging: string = 'https://api.mesastesti.com.ar:3001';
-const production: string = 'https://api.mesastesti.com.ar:3001';
+const apiUrl: string = process.env.REACT_APP_API_URL || "";
+const port: string = process.env.REACT_APP_PORT || "";
+const isProduction: boolean = process.env.NODE_ENV === "production";
 
-export const REST_URL = !process.env.isProduction ? production :
+const localhost: string = `http://192.168.0.8:${port}`;
+const staging: string = `${apiUrl}:${port}`;
+const production: string = `${apiUrl}:${port}`;
+
+export const REST_URL = isProduction ? production :
     useLocalBackend ? localhost : staging;

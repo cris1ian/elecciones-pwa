@@ -8,6 +8,7 @@ import { MesaCandidato } from "../models/mesa-candidato.model";
 import { Resultado } from "../models/resultado.model";
 import { PictureCamera } from "../models/picture-camera.interface";
 import { errorCatcher } from "utils/error-handler";
+import { StringDecoder } from "string_decoder";
 
 export interface ResponseType1 {
     body: string,
@@ -54,7 +55,21 @@ export const getMesasByPuntoMuestral = async (idPuntoMuestral: number): Promise<
 /**
  * Retorna un Observable el puntoMuestral dado un celular
  */
-export const getPuntoMuestralByCelular = async (celular: string): Promise<PuntoMuestralRaw[] | undefined> => {
+export const logIn = async (celular: string, password: string): Promise<PuntoMuestralRaw[] | undefined> => {
+    const ENDPOINT: string = `${REST_URL}/login`;
+
+    try {
+        const resp: AxiosResponse<PuntoMuestralRaw[]> = await axios.post(ENDPOINT, { celular, password });
+        return resp.data
+    } catch (error) {
+        return errorCatcher(error as any)
+    }
+}
+
+/**
+ * Retorna un Observable el puntoMuestral dado un celular
+ */
+export const getPuntoMuestralByCelular = async (celular: StringDecoder): Promise<PuntoMuestralRaw[] | undefined> => {
     const ENDPOINT: string = `${REST_URL}/punto_muestral/${celular}`;
 
     try {

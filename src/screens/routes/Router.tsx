@@ -1,11 +1,11 @@
 import { Navigate, RouteObject, useRoutes } from "react-router-dom";
 import * as Storage from "../../utils/storage";
 import React from "react";
-import { Login } from "screens/non-authenticated/Login";
-import { Reports } from "screens/authenticated/Reportes";
+import { Login } from "screens/components/non-authenticated/Login";
+import { Reports } from "screens/components/authenticated/reportes/Reportes";
 import NotFound from "screens/common/NotFound";
 import { TiposPuntosMuestrales } from "constants/tipos-puntos-muestrales";
-import { CargaDeDatos } from "screens/authenticated/CargaDeDatos";
+import { CargaDeDatos } from "screens/components/authenticated/carga/CargaDeDatos";
 
 export default function Router() {
   const resolveAuthentication = (): boolean => !!Storage.getObject("user");

@@ -62,7 +62,6 @@ export function CargaDeDatos() {
     try {
       resp = await auth.getMesasByPuntoMuestral(+puntoMuestralId);
     } catch (error) {
-      console.log(error);
       return;
     }
     if (!resp) return;
@@ -76,11 +75,11 @@ export function CargaDeDatos() {
     try {
       resp = await auth.getCategoriasByMesaAndPuntoMuestral(+puntoMuestralId, mesa);
     } catch (error) {
-      console.log(error);
       return;
     }
     if (!resp) return;
     setCategorias(resp);
+    setCategoria(resp[0]);
   };
 
   /**
@@ -95,7 +94,6 @@ export function CargaDeDatos() {
     try {
       resp = await auth.getCandidatosByCategoria(categoria.id);
     } catch (error) {
-      console.log(error);
       return;
     }
     if (!resp) return;
@@ -113,7 +111,6 @@ export function CargaDeDatos() {
       setSpinner(true);
       resp = await auth.postMesasCandidatos(_mesasCandidatos, _mesa, _categoria);
     } catch (error) {
-      console.log(error);
       setSpinner(false);
       return;
     }
@@ -159,7 +156,7 @@ export function CargaDeDatos() {
 
       <div className="desktop-wrapper">
         <div className="flex flex-column justify-content-center align-items-center p-3">
-          <Toast ref={toast} position="bottom-center" />
+          <Toast ref={toast} position="top-center" />
           <Dropdown
             value={mesa}
             onChange={(e: DropdownChangeEvent) => setMesa(e.value)}
@@ -170,6 +167,7 @@ export function CargaDeDatos() {
             emptyMessage="No hay resultados"
           />
           <Dropdown
+            disabled
             value={categoria}
             onChange={(e: DropdownChangeEvent) => setCategoria(e.value)}
             options={categorias}

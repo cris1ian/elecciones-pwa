@@ -14,11 +14,13 @@ import ErrorBoundary from "screens/common/ErrorBoundary";
 import { BrowserRouter } from "react-router-dom";
 
 function App() {
+  const basename: string = process.env.REACT_APP_BASENAME || "";
+
   return (
     <PrimeReactProvider>
       <ErrorBoundary>
         <div className="h-full">
-          <BrowserRouter>
+          <BrowserRouter basename={basename}>
             <Router />
           </BrowserRouter>
         </div>

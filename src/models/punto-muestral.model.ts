@@ -5,7 +5,17 @@ export interface PuntoMuestralRaw {
     celular: string,
     peso: number,
     id_tipo: number,
-    registro_ingreso: boolean
+    registro_ingreso: boolean,
+    
+    horapresencia: string,
+    Establecimiento: string,
+    nro_muestra: number,
+    peso_nuevo: number,
+    localidad: string,
+    lat: null,
+    long: null,
+    circuito: string,
+
 }
 
 export class PuntoMuestral {

@@ -18,8 +18,6 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
     this.setState({ hasError: true, error, errorInfo });
-    // You can also log the error to a logging service
-    console.error(error, errorInfo);
   }
 
   render(): ReactNode {
@@ -27,10 +25,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
       return (
         <div>
           <h2>Algo salió mal.</h2>
-          <p>
-            Por favor intente nuevamente, recargue la página o contacte a
-            soporte.
-          </p>
+          <p>Por favor intente nuevamente, recargue la página o contacte a soporte.</p>
         </div>
       );
     }
