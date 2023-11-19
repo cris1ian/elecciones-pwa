@@ -86,7 +86,7 @@ export function Login() {
       <div className="desktop-wrapper">
         <form>
           <div className="flex flex-column justify-content-center align-items-center">
-            <div className={classNames(styles.inputHeight, "cris-height-08 flex flex-column justify-content-center")}>
+            <div className={classNames(styles.inputHeight, "cris-height-08 flex flex-column justify-content-evenly")}>
               {/* Input Form */}
               <div className="align-items-center flex flex-column my-5">
                 <div className="p-float-label mb-5">

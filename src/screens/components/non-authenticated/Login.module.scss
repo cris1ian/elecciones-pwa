@@ -1,5 +1,5 @@
 .inputHeight {
-    height: 30vh;
+    height: 50vh;
 }
 
 .mainInput {
@@ -20,4 +20,23 @@
         font-size: 1.5rem;
         color: #b5b5b5;
     }
+}
+
+/* For Webkit browsers (Chrome, Safari) */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* For Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* For Edge */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
