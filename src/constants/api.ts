@@ -1,4 +1,4 @@
-const useLocalBackend: boolean = true;
+const useLocalBackend: boolean = false;
 
 const apiUrl: string = process.env.REACT_APP_API_URL || "";
 const port: string = process.env.REACT_APP_PORT || "";
